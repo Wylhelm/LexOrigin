@@ -31,3 +31,8 @@ export interface AnalysisState {
   relatedQuotes: DebateQuote[];
   error: string | null;
 }
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}

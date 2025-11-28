@@ -23,6 +23,31 @@ export const MOCK_LAWS: LawArticle[] = [
     content: `Every one who, by communicating statements in any public place, incites hatred against any identifiable group where such incitement is likely to lead to a breach of the peace is guilty of
 (a) an indictable offence and is liable to imprisonment for a term not exceeding two years; or
 (b) an offence punishable on summary conviction.`
+  },
+  {
+    id: 'CRIM-CODE-322',
+    section: '322 (1)',
+    title: 'Theft',
+    statuteName: 'Criminal Code (R.S.C., 1985, c. C-46)',
+    dateEnacted: '1985-12-12',
+    content: `Every one commits theft who fraudulently and without colour of right takes, or fraudulently and without colour of right converts to his use or to the use of another person, anything, whether animate or inanimate, with intent
+(a) to deprive, temporarily or absolutely, the owner of it, or a person who has a special property or interest in it, of the thing or of his property or interest in it;
+(b) to pledge it or deposit it as security;
+(c) to part with it under a condition with respect to its return that the person who parts with it may be unable to perform; or
+(d) to deal with it in such a manner that it cannot be restored in the condition in which it was at the time it was taken or converted.`
+  },
+  {
+    id: 'CRIM-CODE-380',
+    section: '380 (1)',
+    title: 'Fraud',
+    statuteName: 'Criminal Code (R.S.C., 1985, c. C-46)',
+    dateEnacted: '1985-12-12',
+    content: `Every one who, by deceit, falsehood or other fraudulent means, whether or not it is a false pretence within the meaning of this Act, defrauds the public or any person, whether ascertained or not, of any property, money or valuable security or any service,
+(a) is guilty of an indictable offence and liable to a term of imprisonment not exceeding fourteen years, where the subject-matter of the offence is a testamentary instrument or the value of the subject-matter of the offence exceeds five thousand dollars; or
+(b) is guilty
+  (i) of an indictable offence and is liable to imprisonment for a term not exceeding two years, or
+  (ii) of an offence punishable on summary conviction,
+where the value of the subject-matter of the offence does not exceed five thousand dollars.`
   }
 ];
 

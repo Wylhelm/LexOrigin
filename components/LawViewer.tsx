@@ -1,26 +1,38 @@
 import React from 'react';
 import { LawArticle } from '../types';
-import { BookOpen, Search } from 'lucide-react';
+import { BookOpen, Search, ArrowLeft } from 'lucide-react';
 
 interface LawViewerProps {
   law: LawArticle;
   onAnalyze: (law: LawArticle) => void;
+  onBack?: () => void;
   isAnalyzing: boolean;
 }
 
-export const LawViewer: React.FC<LawViewerProps> = ({ law, onAnalyze, isAnalyzing }) => {
+export const LawViewer: React.FC<LawViewerProps> = ({ law, onAnalyze, onBack, isAnalyzing }) => {
   return (
     <div className="h-full flex flex-col bg-slate-950">
       {/* Header */}
-      <div className="p-6 border-b border-slate-800">
-        <div className="flex items-center gap-3 text-slate-500 mb-2">
-          <BookOpen className="w-5 h-5" />
-          <span className="text-xs uppercase tracking-widest font-semibold">{law.statuteName}</span>
+      <div className="p-6 border-b border-slate-800 flex items-start justify-between">
+        <div>
+          {onBack && (
+            <button 
+              onClick={onBack}
+              className="flex items-center gap-1 text-slate-400 hover:text-indigo-400 text-sm mb-3 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Research</span>
+            </button>
+          )}
+          <div className="flex items-center gap-3 text-slate-500 mb-2">
+            <BookOpen className="w-5 h-5" />
+            <span className="text-xs uppercase tracking-widest font-semibold">{law.statuteName}</span>
+          </div>
+          <h1 className="text-2xl font-serif text-slate-100 leading-tight">
+            {law.title} <span className="text-slate-500 font-sans text-lg ml-2">§ {law.section}</span>
+          </h1>
+          <p className="text-xs text-slate-500 mt-2 font-mono">Enacted: {law.dateEnacted}</p>
         </div>
-        <h1 className="text-2xl font-serif text-slate-100 leading-tight">
-          {law.title} <span className="text-slate-500 font-sans text-lg ml-2">§ {law.section}</span>
-        </h1>
-        <p className="text-xs text-slate-500 mt-2 font-mono">Enacted: {law.dateEnacted}</p>
       </div>
 
       {/* Content */}

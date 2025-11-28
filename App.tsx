@@ -3,12 +3,16 @@ import { MOCK_LAWS, MOCK_DEBATES } from './constants';
 import { LawArticle, AnalysisState } from './types';
 import { LawViewer } from './components/LawViewer';
 import { AnalysisPanel } from './components/AnalysisPanel';
+import { LegalAssistant } from './components/LegalAssistant';
+import { LawLibrary } from './components/LawLibrary';
 import { analyzeLegislativeIntent } from './services/geminiService';
-import { Scale, Database } from 'lucide-react';
+import { Scale, Database, MessageSquare, Library } from 'lucide-react';
+
+type LeftPanelView = 'assistant' | 'library' | 'details';
 
 const App: React.FC = () => {
-  // Simple state for the MVP. In a real app, use Zustand.
-  const [selectedLaw, setSelectedLaw] = useState<LawArticle>(MOCK_LAWS[0]);
+  const [leftView, setLeftView] = useState<LeftPanelView>('library');
+  const [selectedLaw, setSelectedLaw] = useState<LawArticle | null>(null);
   
   const [analysisState, setAnalysisState] = useState<AnalysisState>({
     isLoading: false,
@@ -19,6 +23,7 @@ const App: React.FC = () => {
 
   const handleLawSelect = (law: LawArticle) => {
     setSelectedLaw(law);
+    setLeftView('details');
     // Reset analysis when changing law
     setAnalysisState({
       isLoading: false,
@@ -33,11 +38,15 @@ const App: React.FC = () => {
 
     try {
       // 1. Simulate Vector DB Retrieval (Filtering local mock data)
-      // In a real app: await api.post('/analyze-intent', { lawId: law.id })
       const relatedDebates = MOCK_DEBATES.filter(d => d.lawId === law.id);
       
+      // Note: For the new laws (Theft/Fraud) we might not have debates in MOCK_DEBATES.
+      // We'll handle this gracefully.
       if (relatedDebates.length === 0) {
-        throw new Error("No historical debates found for this section.");
+        // Fallback or empty state for demo if no specific debates exist
+        // For MVP, we can reuse some generic debates or show empty.
+        // Let's create a generic message if empty.
+        throw new Error("No historical Hansard records found for this section in the demo database.");
       }
 
       // 2. Call Gemini Service
@@ -72,36 +81,62 @@ const App: React.FC = () => {
           <span className="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded ml-2 border border-slate-700">MVP</span>
         </div>
         
-        {/* Simple Document Switcher */}
         <div className="flex items-center gap-4">
           <span className="text-xs text-slate-500 uppercase tracking-widest flex items-center gap-2">
              <Database className="w-3 h-3" />
              Corpus: Criminal Code
           </span>
-          <select 
-            className="bg-slate-800 border border-slate-700 text-slate-300 text-sm rounded px-3 py-1 outline-none focus:border-indigo-500"
-            value={selectedLaw.id}
-            onChange={(e) => {
-              const law = MOCK_LAWS.find(l => l.id === e.target.value);
-              if (law) handleLawSelect(law);
-            }}
-          >
-            {MOCK_LAWS.map(law => (
-              <option key={law.id} value={law.id}>Section {law.section}</option>
-            ))}
-          </select>
         </div>
       </header>
 
       {/* Main Split View */}
       <main className="flex-1 flex overflow-hidden">
-        {/* Left Panel: Law Text */}
-        <div className="w-1/2 h-full border-r border-slate-800">
-          <LawViewer 
-            law={selectedLaw} 
-            onAnalyze={handleAnalyze} 
-            isAnalyzing={analysisState.isLoading} 
-          />
+        {/* Left Panel: Research & Exploration */}
+        <div className="w-1/2 h-full border-r border-slate-800 flex flex-col">
+          
+          {/* View Content */}
+          <div className="flex-1 overflow-hidden relative">
+            {leftView === 'assistant' && (
+              <LegalAssistant laws={MOCK_LAWS} onSelectLaw={handleLawSelect} />
+            )}
+            
+            {leftView === 'library' && (
+              <LawLibrary laws={MOCK_LAWS} onSelectLaw={handleLawSelect} />
+            )}
+
+            {leftView === 'details' && selectedLaw && (
+              <LawViewer 
+                law={selectedLaw} 
+                onAnalyze={handleAnalyze} 
+                onBack={() => setLeftView('library')}
+                isAnalyzing={analysisState.isLoading} 
+              />
+            )}
+          </div>
+
+          {/* Bottom Navigation for Left Panel (Only show if not in details view for cleaner look, or always show?) 
+              Let's hide it in details view to focus on reading, or keep it to allow quick switching.
+              Let's keep it but disable if in details view? No, let's just show it.
+          */}
+          {leftView !== 'details' && (
+             <div className="h-12 border-t border-slate-800 flex bg-slate-900">
+               <button 
+                 onClick={() => setLeftView('library')}
+                 className={`flex-1 flex items-center justify-center gap-2 text-sm font-medium transition-colors ${leftView === 'library' ? 'text-indigo-400 bg-slate-800/50' : 'text-slate-500 hover:text-slate-300'}`}
+               >
+                 <Library className="w-4 h-4" />
+                 Library
+               </button>
+               <div className="w-px bg-slate-800" />
+               <button 
+                 onClick={() => setLeftView('assistant')}
+                 className={`flex-1 flex items-center justify-center gap-2 text-sm font-medium transition-colors ${leftView === 'assistant' ? 'text-indigo-400 bg-slate-800/50' : 'text-slate-500 hover:text-slate-300'}`}
+               >
+                 <MessageSquare className="w-4 h-4" />
+                 Assistant
+               </button>
+             </div>
+          )}
         </div>
 
         {/* Right Panel: Analysis & RAG Results */}
