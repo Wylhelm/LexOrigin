@@ -1,0 +1,88 @@
+{
+    "laws": [
+        {
+            "id": "CRIM-CODE-229",
+            "document": "Culpable homicide is murder (a) where the person who causes the death of a human being (i) means to cause his death, or (ii) means to cause him bodily harm that he knows is likely to cause his death, and is reckless whether death ensues or not.",
+            "metadata": {
+                "law_name": "Criminal Code",
+                "section": "229",
+                "date_enacted": "1985-01-01"
+            }
+        },
+        {
+            "id": "CRIM-CODE-322",
+            "document": "Every one commits theft who fraudulently and without colour of right takes, or fraudulently and without colour of right converts to his use or to the use of another person, anything, whether animate or inanimate, with intent (a) to deprive, temporarily or absolutely, the owner of it, or a person who has a special property or interest in it, of the thing or of his property or interest in it.",
+            "metadata": {
+                "law_name": "Criminal Code",
+                "section": "322",
+                "date_enacted": "1985-01-01"
+            }
+        },
+        {
+            "id": "CRIM-CODE-380",
+            "document": "Every one who, by deceit, falsehood or other fraudulent means, whether or not it is a false pretence within the meaning of this Act, defrauds the public or any person, whether ascertained or not, of any property, money or valuable security or any service.",
+            "metadata": {
+                "law_name": "Criminal Code",
+                "section": "380",
+                "date_enacted": "1985-01-01"
+            }
+        }
+    ],
+    "debates": [
+        {
+            "id": "DEBATE-1985-001",
+            "document": "Mr. Speaker, this definition of murder is essential to distinguish between intentional acts and mere negligence. We must ensure that the law punishes the intent to kill with the utmost severity.",
+            "metadata": {
+                "speaker_name": "Hon. John Crosbie",
+                "party": "Conservative",
+                "date": "1985-02-14",
+                "topic": "Criminal Code Amendment",
+                "sentiment_score": 0.8
+            }
+        },
+        {
+            "id": "DEBATE-1985-002",
+            "document": "While I agree with the principle, I worry that the 'recklessness' clause might be too broad. Could a momentary lapse of judgment be construed as murder under this definition? We need safeguards.",
+            "metadata": {
+                "speaker_name": "Bob Kaplan",
+                "party": "Liberal",
+                "date": "1985-02-14",
+                "topic": "Criminal Code Amendment",
+                "sentiment_score": -0.4
+            }
+        },
+        {
+            "id": "DEBATE-1985-003",
+            "document": "Theft is not just about property; it is about the violation of trust. The definition must be robust enough to cover modern forms of conversion, not just physical taking.",
+            "metadata": {
+                "speaker_name": "Svend Robinson",
+                "party": "NDP",
+                "date": "1985-03-10",
+                "topic": "Property Rights Bill",
+                "sentiment_score": 0.5
+            }
+        },
+        {
+            "id": "DEBATE-1985-004",
+            "document": "Fraud is an evolving crime. By including 'other fraudulent means', we future-proof this legislation against schemes we cannot yet imagine.",
+            "metadata": {
+                "speaker_name": "Ray Hnatyshyn",
+                "party": "Conservative",
+                "date": "1985-04-22",
+                "topic": "Economic Crime Act",
+                "sentiment_score": 0.9
+            }
+        },
+        {
+            "id": "DEBATE-1985-005",
+            "document": "We must be careful not to criminalize standard business practices. The line between aggressive marketing and fraud can sometimes be thin.",
+            "metadata": {
+                "speaker_name": "John Turner",
+                "party": "Liberal",
+                "date": "1985-04-22",
+                "topic": "Economic Crime Act",
+                "sentiment_score": -0.2
+            }
+        }
+    ]
+}

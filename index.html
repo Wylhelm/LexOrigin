@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LexOrigin - Legislative Archaeology</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
@@ -16,50 +16,120 @@
               sans: ['Inter', 'sans-serif'],
               serif: ['Merriweather', 'serif'],
             },
-            colors: {
-              slate: {
-                850: '#151F2E', // Custom dark shade
-              }
-            }
           }
         }
       }
     </script>
     <style>
+      /* Theme CSS Variables */
+      :root, .theme-dark {
+        --color-bg-primary: #0f172a;
+        --color-bg-secondary: #020617;
+        --color-bg-tertiary: #1e293b;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-text-accent: #a5b4fc;
+        --color-border: #334155;
+        --color-warning: #fbbf24;
+        --color-warning-bg: rgba(251, 191, 36, 0.15);
+        --color-warning-border: rgba(251, 191, 36, 0.4);
+      }
+
+      .theme-light {
+        --color-bg-primary: #ffffff;
+        --color-bg-secondary: #f8fafc;
+        --color-bg-tertiary: #f1f5f9;
+        --color-text-primary: #0f172a;
+        --color-text-secondary: #475569;
+        --color-text-accent: #4338ca;
+        --color-border: #e2e8f0;
+        --color-warning: #b45309;
+        --color-warning-bg: rgba(251, 191, 36, 0.2);
+        --color-warning-border: rgba(180, 83, 9, 0.5);
+      }
+
+      .theme-high-contrast {
+        --color-bg-primary: #000000;
+        --color-bg-secondary: #000000;
+        --color-bg-tertiary: #171717;
+        --color-text-primary: #ffffff;
+        --color-text-secondary: #ffffff;
+        --color-text-accent: #ffff00;
+        --color-border: #ffffff;
+        --color-warning: #ffff00;
+        --color-warning-bg: rgba(255, 255, 0, 0.2);
+        --color-warning-border: #ffff00;
+      }
+
+      .theme-senior {
+        --color-bg-primary: #fefce8;
+        --color-bg-secondary: #ffffff;
+        --color-bg-tertiary: #fef9c3;
+        --color-text-primary: #1e1e1e;
+        --color-text-secondary: #374151;
+        --color-text-accent: #155e75;
+        --color-border: #d1d5db;
+        --color-warning: #92400e;
+        --color-warning-bg: rgba(251, 191, 36, 0.3);
+        --color-warning-border: rgba(146, 64, 14, 0.6);
+        font-size: 1.25rem !important;
+      }
+
+      .theme-senior * {
+        line-height: 1.8 !important;
+      }
+
+      .theme-senior button {
+        min-height: 48px !important;
+        padding: 12px 20px !important;
+      }
+
+      .theme-high-contrast * {
+        font-weight: 600 !important;
+      }
+
+      .theme-high-contrast button,
+      .theme-high-contrast a {
+        text-decoration: underline !important;
+      }
+
+      .theme-high-contrast *:focus,
+      .theme-senior *:focus {
+        outline: 3px solid var(--color-text-accent) !important;
+        outline-offset: 2px !important;
+      }
+
+      /* Base styles using CSS variables */
       body {
-        background-color: #0f172a; /* slate-900 */
-        color: #e2e8f0; /* slate-200 */
+        background-color: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
-      /* Custom Scrollbar for dark theme */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1e293b;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #475569;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #64748b;
+
+      /* Theme utility classes */
+      .theme-bg-primary { background-color: var(--color-bg-primary) !important; }
+      .theme-bg-secondary { background-color: var(--color-bg-secondary) !important; }
+      .theme-bg-tertiary { background-color: var(--color-bg-tertiary) !important; }
+      .theme-bg-accent { background-color: color-mix(in srgb, #4f46e5 20%, transparent) !important; }
+      .theme-text-primary { color: var(--color-text-primary) !important; }
+      .theme-text-secondary { color: var(--color-text-secondary) !important; }
+      .theme-text-accent { color: var(--color-text-accent) !important; }
+      .theme-border { border-color: var(--color-border) !important; }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+      ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
+
+      /* Smooth transitions */
+      *, *::before, *::after {
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
-  }
-}
-</script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

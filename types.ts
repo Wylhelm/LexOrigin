@@ -5,24 +5,26 @@ export interface LawArticle {
   content: string;
   dateEnacted: string;
   statuteName: string;
+  sectionTitle?: string;
+  lawType?: string;
 }
 
 export interface DebateQuote {
   id: string;
-  lawId: string; // Foreign key for mock relationship
+  lawId?: string;
   speakerName: string;
-  party: 'Liberal' | 'Conservative' | 'NDP' | 'Bloc' | 'Green' | 'Independent';
+  party: string;
   date: string;
   text: string;
-  sentimentScore: number; // -1.0 to 1.0
+  sentimentScore: number;
   topic: string;
 }
 
 export interface AnalysisResponse {
   synthesis: string;
-  controversy_score: number; // 1-10
+  controversy_level: string;
+  consensus_color: 'red' | 'yellow' | 'green' | 'gray';
   key_arguments: string[];
-  consensus_color: 'red' | 'yellow' | 'green';
 }
 
 export interface AnalysisState {
@@ -35,4 +37,16 @@ export interface AnalysisState {
 export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+export interface SearchResult {
+  id: string;
+  document: string;
+  metadata: {
+    law_name: string;
+    section: string;
+    section_title?: string;
+    law_type?: string;
+  };
+  relevance_score: number;
 }
